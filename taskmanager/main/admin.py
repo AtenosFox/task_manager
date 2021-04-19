@@ -3,4 +3,11 @@ from .models import Task
 
 
 # Register your models here.
-admin.site.register(Task)
+# admin.site.register(Task)
+
+class TaskAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'task')
+
+
+admin.site.register(Task, TaskAdmin)
+
