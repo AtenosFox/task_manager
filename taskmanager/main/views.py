@@ -39,3 +39,7 @@ def delete_task(request, id):
         return HttpResponseRedirect("/")
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Задача не найдена</h2>")
+
+
+def register(request):
+    return render(request, 'main/register.html')

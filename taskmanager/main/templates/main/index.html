@@ -5,23 +5,39 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Главная страница</h1>
-
+<br>
+<h1 id="head_title">Главная страница</h1>
+<br>
 <!--    Перебор тасков циклом-->
-    {% if tasks%}
-        {% for el in tasks %}
-        <div class="alert alert-success" role="alert">
-        <p>Номер задачи : {{ el.id }}</p>
-        <h3 class="alert-heading">{{ el.title }}</h3>
-        <p>{{ el.task }}</p>
-            <p class="mb-1">Задача создана: {{ el.created }}</p><br>
+{% if tasks%}
+{% for el in tasks %}
+<div class="task">
+    <div class="card">
+        <h6 class="card-header">
+            <nav class="nav nav-pills nav-fill">
+                <li class="nav-item">Номер задачи: {{ el.id }}</li>
+                <li class="nav-item">Cоздана пользователем: User</li>
+                <li class="nav-item">Дата создания: {{ el.created }}</li>
+            </nav>
+        </h6>
+        <div class="card-body">
+            <h5 class="card-title">{{ el.title }}</h5>
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">{{ el.task }}</p>
+                </div>
+            </div>
+            <br>
             <form action="delete_task/{{ el.id }}">
-            {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Удалить</a></button>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Удалить</a></button>
             </form>
         </div>
-        {% endfor %}
-    {% else %}
-        <p>Задачи отсутсвтуют</p>
-    {% endif %}
+    </div>
+</div>
+<br>
+{% endfor %}
+{% else %}
+<p>Задачи отсутсвтуют</p>
+{% endif %}
 {% endblock %}
