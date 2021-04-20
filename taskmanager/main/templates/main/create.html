@@ -10,7 +10,7 @@
         {% csrf_token %}
         {{ form.title }} <br>
         {{ form.task }} <br>
-<!--        {{ form.create_date }} <br>-->
+        {{ form.create }} <br>
         <button type="submit" class="btn btn-success">Добавить</button>
         <span>{{ error }}</span>
 {% endblock %}
