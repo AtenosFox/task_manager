@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseNotFound
 from .models import Task
-from .forms import TaskForm
+from .forms import TaskForm, LoginForm
+from django.views.generic import View
 
 
 def index(request):
@@ -41,5 +42,9 @@ def delete_task(request, id):
         return HttpResponseNotFound("<h2>Задача не найдена</h2>")
 
 
-def register(request):
-    return render(request, 'main/register.html')
+class LoginView(Task, View):
+    def get(self, request, *args, **kwargs):
+        form = LoginForm(request.POST or None)
+        tasks = Task.objects.all()
+        context = {'form': form}
+        return render(request, 'login.html', context)
